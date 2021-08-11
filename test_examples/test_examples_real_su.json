@@ -1,0 +1,7 @@
+{
+    "expanse_basic_mpi_job": 512,
+    "expanse_basic_openmp_job": 256,
+    "expanse_hybrid_mpi_openmpi_job": 512,
+    "expanse_large_memory_example": 1024,
+    "expanse_shared_example": 40
+}
