@@ -9,7 +9,16 @@ class SBATCHScript:
         self.args = {}
 
     def __getitem__(self, key):
-        return self.args[key]
+        if type(key) == list:
+            return self.multiple_key_query(key)
+        else:
+            return self.args[key]
+
+    def __str__(self):
+        return '\n'.join([
+            f"{key}: {value}"
+            for key, value in self.args.items()
+        ])
 
     def parse(self):
         for line in open(self.path, 'r').readlines():
@@ -32,6 +41,18 @@ class SBATCHScript:
 
             self.args[arg] = val
 
+    def multiple_key_query(self, keys):
+        """
+        A function to allow for querying of parameters
+        that can have multiple names, .e.g., -N, --nodes
+        """
+        for key in keys:
+            try:
+                return self.args[key]
+            except KeyError:
+                continue
+
+        raise KeyError(f"None of {keys} in sbatch arguments") 
 
 if __name__ == "__main__":
     s = SBATCHScript("test_examples/expanse_shared_example.sh")
