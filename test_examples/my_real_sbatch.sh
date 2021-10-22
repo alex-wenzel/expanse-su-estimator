@@ -8,6 +8,7 @@
 #SBATCH --account=ddp242
 #SBATCH --mail-user=myemail@examplesbatch.com
 #SBATCH -t 48:00:00
+#SBATCH --mem=8G
 #!/bin/bash
 
 module load singularitypro
